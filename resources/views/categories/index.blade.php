@@ -29,7 +29,7 @@
 		<div class="col-md-3">
 			<div class="well">
 				{!! Form::open(['route' => 'categories.store', 'method' => 'POST']) !!}
-					<h2>New Category</h2>
+					<h2>New Neo-Zone</h2>
 					{{ Form::label('name', 'Name:') }}
 					{{ Form::text('name', null, ['class' => 'form-control']) }}
 

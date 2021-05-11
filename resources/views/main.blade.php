@@ -4,7 +4,7 @@
     @include('partials._head')
   </head>
   
-  <body>
+  <body class="grey lighten-5">
 
     @include('partials._nav')    
 

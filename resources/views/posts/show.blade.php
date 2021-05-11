@@ -5,16 +5,24 @@
 @section('content')
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col s12 m8">
+
 			<h1>{{ $post->title }}</h1>
-			
-			<p class="lead">{!! $post->body !!}</p>
+			@if(!empty($post->image))
+				<img src="{{asset('/images/' . $post->image)}}" width="400" height="200" />
+			@endif
+
+
+			<p class="lead" style="width: 50%;">{!! $post->body !!}</p>
 
 			<hr>
 			
 			<div class="tags">
+				<h6>Tags :</h6>
 				@foreach ($post->tags as $tag)
-					<span class="label label-default">{{ $tag->name }}</span>
+					<div class="chip">
+						{{ $tag->name }}
+					</div>
 				@endforeach
 			</div>
 
@@ -36,11 +44,11 @@
 						<tr>
 							<td>{{ $comment->name }}</td>
 							<td>{{ $comment->email }}</td>
-							<td>{{ $comment->comment }}</td>
-							<td>
-								<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-								<a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-							</td>
+							<td>{!! $comment->comment !!} </td>
+							{{--<td>--}}
+								{{--<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>--}}
+								{{--<a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>--}}
+							{{--</td>--}}
 						</tr>
 						@endforeach
 					</tbody>
@@ -48,8 +56,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-4">
-			<div class="well">
+		<div class="col s12 m4">
+			<div class="card-panel">
 				<dl class="dl-horizontal">
 					<label>Url:</label>
 					<p><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a></p>
@@ -76,16 +84,18 @@
 				</dl>
 				<hr>
 				<div class="row">
-					<div class="col-sm-6">
+					@if(Auth::user()->id == $post->user_id)
+					<div class="col s12 m6">
 						{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
 					</div>
-					<div class="col-sm-6">
+					<div class="col s12 m6">
 						{!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
 
 						{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
 
 						{!! Form::close() !!}
 					</div>
+					@endif
 				</div>
 
 				<div class="row">

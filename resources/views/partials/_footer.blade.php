@@ -1,3 +1,10 @@
-      <hr>
+</div>
 
-      <p class="text-center">Copyright Jacurtis - All Rights Reserved</p>
+      <footer class="page-footer grey darken-3">
+            <div class="footer-copyright">
+                  <div class="container">
+                        © Copyright NNNC - All Rights Reserved
+                        <a class="grey-text text-lighten-4 right" href="{{ route('indexPage') }}">Acceuil</a>
+                  </div>
+            </div>
+      </footer>

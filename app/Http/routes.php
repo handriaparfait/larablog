@@ -58,6 +58,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('contact', 'PagesController@getContact');
     Route::post('contact', 'PagesController@postContact');
 	Route::get('about', 'PagesController@getAbout');
-	Route::get('/trocksystem', 'PagesController@getIndex');
+	Route::get('/trocksystem', 'PagesController@getIndex')->name('trocksystem');
 	Route::resource('posts', 'PostController');
 });

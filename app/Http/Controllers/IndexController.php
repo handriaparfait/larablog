@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Post;
 
 class IndexController extends Controller
 {
@@ -15,7 +18,22 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('index');
+//        $posts = Post::orderBy('created_at', 'desc')->All()->get();
+        $tags = DB::table('tags')->get();
+        $agriculteurs = DB::table('posts')->where('category_id', 1)->orderBy('created_at', 'desc')->limit(3)->get();
+        $batisseurs = DB::table('posts')->where('category_id', 2)->orderBy('created_at', 'desc')->limit(3)->get();
+        $chasseurs = DB::table('posts')->where('category_id', 3)->orderBy('created_at', 'desc')->limit(3)->get();
+        $guerisseurs = DB::table('posts')->where('category_id', 4)->orderBy('created_at', 'desc')->limit(3)->get();
+        $mineurs = DB::table('posts')->where('category_id', 5)->orderBy('created_at', 'desc')->limit(3)->get();
+        $pecheurs = DB::table('posts')->where('category_id', 6)->orderBy('created_at', 'desc')->limit(3)->get();
+        return view('index')
+            ->withAgriculteurs($agriculteurs)
+            ->withBatisseurs($batisseurs)
+            ->withChasseurs($chasseurs)
+            ->withGuerisseurs($guerisseurs)
+            ->withMineurs($mineurs)
+            ->withPecheurs($pecheurs)
+            ->withTags($tags);
     }
 
     /**
